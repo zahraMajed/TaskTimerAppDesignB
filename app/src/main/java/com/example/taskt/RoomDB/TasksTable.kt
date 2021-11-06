@@ -18,5 +18,5 @@ data class TasksTable(
     val taskDescription: String,
 
     @ColumnInfo(name = "TaskTime")
-    val taskTime: String
+    var taskTime: String
 )

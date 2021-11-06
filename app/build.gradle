@@ -49,5 +49,7 @@ dependencies {
     kapt "androidx.room:room-compiler:2.3.0"
     //coroutines dependency
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
-
+    //lottie animation
+    def lottieVersion = "4.2.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }
