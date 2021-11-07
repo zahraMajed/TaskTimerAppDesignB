@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.taskt.RoomDB.TasksTable
@@ -24,6 +25,8 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
     var running=false
     var pauseOffset: Long = 0
 
+    var isCheckDone=false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): itemViewHolder {
         return itemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_view,parent,false))
 
@@ -36,12 +39,34 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
         val TaskName=TaskList[position].taksName
         val TaskDes=TaskList[position].taskDescription
         val TaskTime=TaskList[position].taskTime
-
+        val TisDone=TaskList[position].isDone
 
         holder.itemView.apply {
             tvTaskNameRV.text=TaskName
 
+            if(TisDone){
+                imageViewRV.playAnimation()
+            }
 
+            //if user want to edit its task
+            FABedit.setOnClickListener(){
+                LL1RV.visibility=View.GONE
+                LL3RV.visibility=View.VISIBLE
+                edTaskInsertRV.setText(TaskName)
+                edTaskDesInsertRV.setText(TaskDes)
+            }
+
+            btnSaveInsertRV.setOnClickListener(){
+                activity.updateTask(TasksTable(TaskId,edTaskInsertRV.text.toString(), edTaskDesInsertRV.text.toString(),TaskTime,TisDone))
+            }
+
+            //it should be close icon instead of LL2RV
+            FABclose.setOnClickListener(){
+                LL1RV.visibility=View.VISIBLE
+                LL3RV.visibility=View.GONE
+            }
+
+            //if user want to start timer
             FABtimerr.setOnClickListener(){
                 LL1RV.visibility=View.GONE
                 LL2RV.visibility=View.VISIBLE
@@ -63,9 +88,23 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
             }//end startbutton
 
             //it should be close icon instead of LL2RV
-            LL2RV.setOnClickListener(){
+            FABcloseLL2RV.setOnClickListener(){
                 LL1RV.visibility=View.VISIBLE
                 LL2RV.visibility=View.GONE
+            }
+
+            imageViewRV.setOnClickListener(){
+                if (isCheckDone){
+                    imageViewRV.speed= -1F
+                    imageViewRV.playAnimation()
+                    isCheckDone=false
+                    activity.updateIsDone(TaskId,false)
+                }else{
+                    imageViewRV.speed= 1F
+                    imageViewRV.playAnimation()
+                    isCheckDone=true
+                    activity.updateIsDone(TaskId,true)
+                }
             }
 
             if (activity.isBtnSumarryClick){
@@ -73,13 +112,16 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
                 activity.tvWelcomeView.text="Tasks Summary"
                 if (TaskTime.isNotEmpty()){
                     tvTaskTimeRVD.visibility=View.VISIBLE
-                    FABtimerr.visibility=View.GONE
                     tvTaskTimeRVD.text=TaskTime
+                    FABtimerr.visibility=View.GONE
+                    FABedit.visibility=View.GONE
+                    imageViewRV.visibility=View.GONE
                 }else{
                     FABtimerr.visibility=View.VISIBLE
+                    FABedit.visibility=View.GONE
+                    imageViewRV.visibility=View.GONE
                     tvTaskTimeRVD.visibility=View.GONE
                 }
-
             }else
             {
                 activity.btnSummaryTask.visibility=View.VISIBLE

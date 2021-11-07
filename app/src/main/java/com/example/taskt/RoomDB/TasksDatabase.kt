@@ -14,7 +14,7 @@ for the underlying connection to your app’s persisted, relational data.
 /*1) this abstract class should extend RoomDatabase
 and annotated with @Database (lists the entities contained in the database (it take them in array) version and exportSchem)*/
 
-@Database(entities= [TasksTable::class], version = 1, exportSchema = false)
+@Database(entities= [TasksTable::class], version = 2, exportSchema = false)
 abstract class TasksDatabase : RoomDatabase() {
     //2 create variable and fun that return instance of this class to be used at run time ant to get access to Dao
     companion object{

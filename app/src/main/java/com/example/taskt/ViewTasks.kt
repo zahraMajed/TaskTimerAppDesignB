@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskt.RoomDB.TasksDatabase
+import com.example.taskt.RoomDB.TasksTable
 import kotlinx.android.synthetic.main.activity_view_tasks.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +61,21 @@ import kotlinx.coroutines.withContext
              tasksDB.getTasksDao().updateTaskTime(id, time)
          }
      }//end updateTime()
+
+     fun updateTask(task:TasksTable){
+         CoroutineScope(Dispatchers.IO).launch {
+             tasksDB.getTasksDao().updateTask(task)
+             getTasks()
+         }
+         Toast.makeText(applicationContext, "${task.taksName} is up-to-date!", Toast.LENGTH_SHORT).show()
+     }//end updateTime()
+
+     fun updateIsDone(id:Int,isDone:Boolean){
+         CoroutineScope(Dispatchers.IO).launch {
+             tasksDB.getTasksDao().updateIsDone(id,isDone)
+             getTasks()
+         }
+     }
 
 
 }//end class

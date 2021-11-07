@@ -31,7 +31,7 @@ class AddTask : AppCompatActivity() {
             if (edTaskInsert.text.isNotEmpty() && edTaskDesInsert.text.isNotEmpty()){
                 var taskName=edTaskInsert.text.toString(); var taskDes=edTaskDesInsert.text.toString()
                 CoroutineScope(Dispatchers.IO).launch {
-                   tasksDB.getTasksDao().insertTask(TasksTable(0,taskName,taskDes,""))
+                   tasksDB.getTasksDao().insertTask(TasksTable(0,taskName,taskDes,"", false))
                 }//end CoroutineScope
                 Toast.makeText(applicationContext, "Task saved successfully!", Toast.LENGTH_SHORT).show()
                 edTaskInsert.text.clear(); edTaskDesInsert.text.clear()
