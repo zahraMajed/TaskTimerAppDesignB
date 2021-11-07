@@ -8,13 +8,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskT">
         <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".ViewTasks"
             android:exported="true" />
         <activity
             android:name=".AddTask"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

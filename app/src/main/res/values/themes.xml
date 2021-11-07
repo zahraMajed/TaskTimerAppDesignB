@@ -3,7 +3,7 @@
     <style name="Theme.TaskT" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/BTNgrey</item>
-        <item name="colorPrimaryVariant">@color/brown</item>
+        <item name="colorPrimaryVariant">#525252</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/RVgrey</item>

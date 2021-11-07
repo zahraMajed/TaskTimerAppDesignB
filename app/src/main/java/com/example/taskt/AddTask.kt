@@ -1,9 +1,11 @@
 package com.example.taskt
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.taskt.RoomDB.TasksDatabase
 import com.example.taskt.RoomDB.TasksTable
@@ -16,6 +18,8 @@ class AddTask : AppCompatActivity() {
     lateinit var edTaskInsert:EditText
     lateinit var edTaskDesInsert:EditText
     lateinit var btnSaveInsert:Button
+    lateinit var backBtn:ImageView
+
     lateinit var tasksDB: TasksDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +28,13 @@ class AddTask : AppCompatActivity() {
         edTaskInsert=findViewById(R.id.edTaskInsert)
         edTaskDesInsert=findViewById(R.id.edTaskDesInsert)
         btnSaveInsert=findViewById(R.id.btnSaveInsert)
-
+        backBtn=findViewById(R.id.backAdd)
        tasksDB= TasksDatabase.getInstance(this)
+
+        backBtn.setOnClickListener(){
+            intent= Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
 
         btnSaveInsert.setOnClickListener(){
             if (edTaskInsert.text.isNotEmpty() && edTaskDesInsert.text.isNotEmpty()){
