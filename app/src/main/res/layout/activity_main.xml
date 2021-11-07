@@ -12,24 +12,33 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/home"
-        tools:layout_editor_absoluteX="-53dp"
-        tools:layout_editor_absoluteY="180dp" />
+        />
 
+    <ImageView
+        android:id="@+id/logoMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        app:srcCompat="@drawable/timedo" />
 
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Get things done with TimerIo"
+        android:fontFamily="@font/roboto_light"
+        android:text="Get things done with TimerDo"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintVertical_bias="0.22000002" />
 
 
     <LinearLayout
@@ -59,9 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/roboto_medium"
             android:backgroundTint="#4F00000C"
-            android:text="Add task"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Add new task"
             android:textSize="20sp" />
 
         <!-- 7E0C8246-->
