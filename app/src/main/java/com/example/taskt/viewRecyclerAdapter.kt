@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.taskt.RoomDB.TasksTable
@@ -76,11 +75,11 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
 
             startbutton.setOnClickListener {
                 if (runningTask==null){
-                    startStopSelf(chronometer,TaskObj,startbutton,imageView2)
+                    startStopSelf(chronometer, TaskObj, startbutton, imageView2, stopbutton)
                 }else
                 {
                     if (runningTask==chronometer){
-                        startStopSelf(chronometer,TaskObj,startbutton,imageView2)
+                        startStopSelf(chronometer,TaskObj,startbutton,imageView2,stopbutton)
                     }else{
                         startStopB(chronometer,TaskObj,startbutton,imageView2)
                     }
@@ -133,7 +132,13 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
 
     override fun getItemCount(): Int=TaskList.size
 
-    fun startStopSelf(chronometer: Chronometer,taskObj: TasksTable,startbutton:ImageView, imageView2:LottieAnimationView ){
+    fun startStopSelf(
+        chronometer: Chronometer,
+        taskObj: TasksTable,
+        startbutton: ImageView,
+        imageView2: LottieAnimationView,
+        stopbutton: ImageView
+    ){
         if (!running){
             chronometer.base= SystemClock.elapsedRealtime() - pauseOffset
             chronometer.start()
@@ -147,11 +152,13 @@ class viewRecyclerAdapter (val activity: ViewTasks, val TaskList:List<TasksTable
             imageView2.playAnimation()
             //update btns
             startbutton.background= ContextCompat.getDrawable(activity, R.drawable.pause_circle_filled)
+            stopbutton.visibility=View.VISIBLE
         }else{
             chronometer.stop()
             running=false
             pauseOffset = SystemClock.elapsedRealtime() - chronometer.base
             startbutton.background= ContextCompat.getDrawable(activity, R.drawable.not_started)
+            stopbutton.visibility=View.GONE
             imageView2.pauseAnimation()
             taskObj.taskTime=chronometer.text.toString()
             activity.updateTime(taskObj.id,taskObj.taskTime)
